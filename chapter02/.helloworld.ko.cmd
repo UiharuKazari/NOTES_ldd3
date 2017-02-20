@@ -1,0 +1,1 @@
+cmd_/home/fedora/Books/GITHUB/NOTES_ldd3/chapter02/helloworld.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/fedora/Books/GITHUB/NOTES_ldd3/chapter02/helloworld.ko /home/fedora/Books/GITHUB/NOTES_ldd3/chapter02/helloworld.o /home/fedora/Books/GITHUB/NOTES_ldd3/chapter02/helloworld.mod.o ;  true
