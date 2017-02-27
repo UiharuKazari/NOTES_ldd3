@@ -1,0 +1,37 @@
+* Kernel decide which driver to use by MAJOR NUMBER, and MINOR NUMBER's usage is defined by the driver itself.
+
+* STEP
+	1. alloc major number (unregister)
+	2. alloc cdev structures
+
+file structure.f_op -> file_operation structure (a collection of function pointers, e.g. open,read ... )
+a pointer to struct file : (file or) filp
+
+struct file_operations scull_fops = {
+	.owner = 	THIS_MODULE,
+	.llseek =	scull_llseek,
+	.read = 	scull_read,
+	.write =	scull_write,
+	.ioctl =	scull_ioctl, 
+	.open =		scull_open,
+	.release = 	scull_release,
+};
+
+* There can be numerous file structures representing multiple open descriptors on a single file, but they all point to a single inode structure.
+
+inode structure contains:
+	dev_t i_rdev; -- contains the actual device number
+	struct cdev *i_cdev; -- cdev is the kernel internal structure the represents char device <linux/cdev.h>
+
+* register cdev
+1. obtain a standalone cdev struct
+	struct cdev *my_cdev = cdev_alloc();
+	my_cdev->ops = &my_fops;
+2. embed cdev struct within a device-specific struct of your own (scull)
+	void cdev_init(struct cdev *cdev, struct file_operations *fops);
+3. int cdev_add(struct cdev *dev, dev_t num, unsigned int count);
+
+* remove cdev
+void cdev_del(struct cdev *dev)
+
+
