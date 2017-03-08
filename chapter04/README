@@ -1,0 +1,34 @@
+I don't complie my own kernel. And the debug configs diff between 2.6.x and 4.x versions.
+
+*[p94]
+I try write a module named "printk", but failed to insmod. Then I change the name "printktest", It's ok.
+%i -- signed int
+%p -- original pointer(the address)
+
+*[p94]
+The 8 loglevel macro is not defined in <linux/kernel.h>, but <linux/kern_levels.h>.
+The DEFUALT_MESSAGE_LOGLEVEL can't be found in <linux/printk.c>. (the printk.c can't be found either) The default level is warning, I test for this result.
+
+*[p95]
+fedora25 no klogd & syslogd. I can't understand console log output sth.
+If I insmod/rmmod module in terminal ( ctrl + alt + F5 ), I can see the message in the screen. And the default message level is 0-3, because the /proc/sys/kernel/printk is "4 x x x".
+The offical example setlevel.c is out-of-date now. Because "Starting  around  kernel  2.6.18,  the  _syscall  macros  were  removed from header files supplied to user space.  Use syscall(2) instead." from `man 2 _syscall`. And the right way is in my setlevel.c . Don't forget to run "setlevel" by root.
+
+*[p96]
+setconsole ignored.
+"How Messages Get Logged" almost can't understand.
+
+*[p98]
+debug method: useful but I haven't write sth for it. Try in later program.
+
+*[p100]
+use printk_ratelimit() to limit the rate of printk.
+
+*[p100]
+print_dev_t
+format_dev_t 
+Try later.
+
+*[p103]
+scull_read_procmem ...Ur...
+
